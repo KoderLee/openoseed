@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/osgi
+    http://www.springframework.org/schema/osgi/spring-osgi.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean class="org.openo.nfvo.nsservice.service.activator.RegisterService"
+		init-method="startThread"></bean>
+
+
+
+	<bean id="adapterNetworkManager"
+		class="org.openo.nfvo.nsservice.service.adapter.AdapterNetworkManager">
+	</bean>
+
+	<bean id="nsServiceDao"
+		class="org.openo.nfvo.nsservice.service.database.dao.NsServiceDaoImpl">
+		<property name="mapperManager" ref="mapperManager"></property>
+	</bean>
+
+	<bean id="netWorkROA" class="org.openo.nfvo.nsservice.rest.NetworkRoa">
+		<property name="nsServiceDao" ref="nsServiceDao"></property>
+	</bean>
+
+	<bean id="adapterVnfManager"
+		class="org.openo.nfvo.nsservice.service.adapter.AdapterVnfManager">
+	</bean>
+
+	<bean id="vnfROA" class="org.openo.nfvo.nsservice.rest.VnfRoa">
+		<property name="nsServiceDao" ref="nsServiceDao"></property>
+	</bean>
+
+	<bean id="nsROA" class="org.openo.nfvo.nsservice.rest.NsRoa">
+		<property name="nsServiceDao" ref="nsServiceDao"></property>
+	</bean>
+
+
+
+
+</beans>

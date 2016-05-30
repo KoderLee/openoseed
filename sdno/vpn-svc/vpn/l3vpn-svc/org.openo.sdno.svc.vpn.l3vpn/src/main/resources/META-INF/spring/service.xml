@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:osgi="http://www.springframework.org/schema/osgi"
+ xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+ xmlns:ctx="http://www.springframework.org/schema/context" xmlns:oms="http://www.openo.org/schema/oms"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xsi:schemaLocation="
+	 http://www.springframework.org/schema/beans 
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/osgi
+	    http://www.springframework.org/schema/osgi/spring-osgi.xsd
+	 http://www.springframework.org/schema/context 
+	 http://www.springframework.org/schema/context/spring-context.xsd
+	 http://www.springframework.org/schema/osgi-compendium 
+	 http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+	 http://www.openo.org/schema/oms
+	 http://www.openo.org/schema/oms/oms.xsd">
+
+	<context:component-scan base-package="org.openo.sdno.svc.vpn.l3vpn" />
+	<context:component-scan base-package="org.openo.sdno.cbb.sdnwan.dao" />
+    <osgi:reference id="invDAO"
+            interface="org.openo.sdno.inventory.sdk.inf.IInvDAO" bean-name="invDAOImpl">
+    </osgi:reference>
+    <osgi:reference id="controllerService"
+        interface="org.openo.sdno.inventory.sdk.inf.IControllerService" bean-name="controllerServiceImpl">
+    </osgi:reference>
+    <osgi:reference id="invServices"
+        interface="org.openo.sdno.inventory.sdk.inf.IInventoryDaoService" bean-name="invServicesImpl">
+    </osgi:reference>
+    <osgi:reference id="l3VpnTranslaterV2"
+        interface="org.openo.sdno.cbb.sdnwan.translater.ModelTranslater" bean-name="v2.L3VpnTranslater">
+    </osgi:reference>
+    <osgi:reference id="terminationPointServiceSDK" bean-name="terminationPointServiceImpl" interface="org.openo.sdno.inventory.sdk.inf.ITerminationPointService" />
+	<bean id="L3VpnSvcRestModule" class="org.openo.sdno.svc.vpn.l3vpn.L3VpnSvcRestModule" init-method="start"
+		destroy-method="stop">
+		<property name="roaResList">
+			<list>
+				<ref bean="L3VpnServiceAPIController" />
+				<ref bean="TpServiceAPIController" />
+				<ref bean="TeServiceAPIController" />
+				<ref bean="VpnBindServiceAPIController" />
+			</list>
+		</property>
+	</bean>
+	<bean id="L3VpnServiceAPIController" class="org.openo.sdno.svc.vpn.l3vpn.rest.L3vpnServiceAPIController">
+		<property name="service" ref="L3vpnService" />
+	</bean>
+	<bean id="L3vpnQueryService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.L3VpnQueryService">
+		<property name="l3vpnSBIService" ref="L3vpnSBIService" />
+	</bean>
+	<bean id="L3vpnModifyService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.L3VpnModifyService">
+		<property name="l3vpnSBIService" ref="L3vpnSBIService" />
+		<property name="l3VpnQueryService" ref="L3vpnQueryService" />
+	</bean>
+	<bean id="L3vpnDeleteService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.L3VpnDeleteService">
+		<property name="l3vpnSBIService" ref="L3vpnSBIService" />
+		<property name="l3VpnQueryService" ref="L3vpnQueryService" />
+		<property name="L3VpnPoolPolicyService" ref="L3VpnPoolPolicyService" />
+	</bean>
+	<bean id="L3vpnService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.DefaultL3vpnService">
+		<property name="l3vpnSBIService" ref="L3vpnSBIService" />
+		<property name="l3VpnQueryService" ref="L3vpnQueryService" />
+		<property name="l3VpnModifyService" ref="L3vpnModifyService" />
+		<property name="l3VpnDeleteService" ref="L3vpnDeleteService" />
+		<property name="l3VpnMergePolicyService" ref="L3VpnMergePolicyService" />
+		<property name="l3VpnDefaultValueService" ref="L3VpnDefaultValueService" />
+		<property name="L3VpnPoolPolicyService" ref="L3VpnPoolPolicyService" />
+	</bean>
+	<bean id="AluL3vpnSBIService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.AluL3vpnSBIService">
+	</bean>
+	<bean id="L3vpnSBIService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.DefaultL3vpnSBIService">
+		<property name="l3VpnQueryService" ref="L3vpnQueryService" />
+		<property name="aluL3vpnSBIService" ref="AluL3vpnSBIService" />
+	</bean>
+	<bean id="VniService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.DefaultVniService">
+		<property name="vniVpnService" ref="VniVpnService" />
+		<property name="topologyService" ref="topologyService" />
+	</bean>
+	<bean id="VniVpnService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.VniVpnService">
+		<property name="l3vpnSBIService" ref="L3vpnSBIService" />
+		<property name="vniVpnOperateService" ref="VniVpnOperateService" />
+	</bean>
+	<bean id="VniVpnOperateService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.VniVpnOperateService">
+		<property name="terminationPointService" ref="terminationPointServiceSDK" />
+	</bean>
+	
+    <bean id="TpServiceAPIController" class="org.openo.sdno.svc.vpn.l3vpn.rest.TpServiceAPIController">
+        <property name="service" ref="VpnTpService" />
+    </bean>
+	<bean id="VpnTpService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.DefaultVpnTpService">
+         <property name="l3VpnModifyService" ref="L3vpnModifyService" />
+    </bean>
+	<bean id="TeServiceAPIController" class="org.openo.sdno.svc.vpn.l3vpn.rest.TeServiceAPIController">
+        <property name="service" ref="L3vpnTeService" />
+    </bean>
+	<bean id="L3vpnTeService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.DefaultL3vpnTeService"></bean>
+	<bean id="L3VpnMergePolicyService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.L3VpnMergePolicyService"></bean>
+	<bean id="L3VpnDefaultValueService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.L3VpnDefaultValueService"></bean>
+		<bean id="L3VpnPoolPolicyService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.L3VpnPoolPolicyService"></bean>
+	<bean id="VpnBindServiceAPIController" class="org.openo.sdno.svc.vpn.l3vpn.rest.VpnBindServiceAPIController">
+        <property name="service" ref="VniService" />
+    </bean>
+    <bean id="topologyService" class="org.openo.sdno.svc.vpn.l3vpn.services.impl.dci.TopologyService"></bean>
+</beans>
+
+
+
+
+

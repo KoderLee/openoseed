@@ -1,0 +1,10 @@
+{
+    "executor:jobs:create": "@",
+    "executor:jobs:modify": "@",
+    "executor:jobs:get": "@",
+    "executor:rules:register:modify": "@",
+    "executor:rules:unregister:modify": "@",
+    "executor:rules:get": "@"
+}
+
+

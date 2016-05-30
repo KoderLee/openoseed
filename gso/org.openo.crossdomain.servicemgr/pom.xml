@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.openo.crossdomain.commsvc</groupId>
+		<artifactId>org.openo.crossdomain.commsvc.pkgbase</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>	
+	<groupId>org.openo.crossdomain</groupId>
+	<artifactId>org.openo.crossdomain.servicemgr</artifactId>
+	<version>2.0-SNAPSHOT</version>
+	<name>org.openo.crossdomain.servicemgr</name>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.openo.baseservice</groupId>
+			<artifactId>org.openo.baseservice.mybatis</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+	
+        <dependency>
+            <groupId>org.openo.baseservice</groupId>
+            <artifactId>org.openo.baseservice.data</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openo.baseservice</groupId>
+            <artifactId>org.openo.baseservice.util</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+		<dependency>
+			<groupId>org.openo.baseservice</groupId>
+			<artifactId>org.openo.baseservice.roa.cbb</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openo.baseservice</groupId>
+			<artifactId>org.openo.baseservice.rpc.cbb</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+            <groupId>org.openo.baseservice.biz</groupId>
+			<artifactId>org.openo.baseservice.biz.trail</artifactId>
+            <version>5.1.11</version>
+        </dependency>
+		<dependency>
+			<groupId>org.openo.crossdomain.commsvc</groupId>
+			<artifactId>org.openo.crossdomain.commsvc.common</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openo.crossdomain.commsvc</groupId>
+			<artifactId>org.openo.crossdomain.commsvc.formation</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>		
+		
+		<!-- UT -->
+		<dependency>
+               <groupId>org.jmockit</groupId>
+               <artifactId>jmockit</artifactId>
+               <version>1.18</version>
+               <scope>test</scope>
+        </dependency>
+        <dependency>
+               <groupId>org.jmockit</groupId>
+               <artifactId>jmockit-coverage</artifactId>
+               <version>1.18</version>
+               <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.187</version>
+		</dependency>
+        <!-- End UT -->		
+	</dependencies>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<resources.dir>${basedir}/src/main/resources/</resources.dir>
+		<release.dir>${basedir}/../release/pkgzip/apps/ServiceManager-1.0.0.0/module/org.openo.crossdomain.servicemgr/repository/</release.dir>
+		<osgi.import>
+			!org.slf4j, 
+			javax.xml.parsers;version=0,
+			!org.apache.pluto.container, 
+			org.w3c.dom;version=0,
+			!com.as.bsp.extension.*,
+			!org.*,
+			!javax.servlet.*,
+			org.springframework.beans.factory;version="3.0",
+			!org.openo.crossdomain.commsvc.common.*,
+			!org.openo.crossdomain.commsvc.formation.*,
+			!org.openo.crossdomain.commsvc.jobscheduler.*,
+			!org.openo.crossdomain.commsvc.authorization.*,
+			!org.openo.crossdomain.commsvc.validator.*,
+			!redis.clients.jedis.exceptions,
+			!org.openo.baseservice.biz.trail
+		</osgi.import>
+		<osgi.activator>org.openo.crossdomain.servicemgr.activator.Activator</osgi.activator>
+		
+	</properties>
+</project>

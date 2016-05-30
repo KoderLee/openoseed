@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2016, Huawei Technologies Co., Ltd.
+   
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.huawei.icto.commonsvc.decomposer.dao.mapper.ResMappingMapper">
+	<resultMap type="com.huawei.icto.commonsvc.decomposer.model.ResMapping"
+		id="resMapping">
+		<result property="tenantID" column="TENANTID" />
+		<result property="serviceID" column="SERVICEID" />
+		<result property="resourceID" column="RESOURCEID" />
+		<result property="resourceLabel" column="RESOURCELABEL" />
+		<result property="type" column="TYPE" />
+		<result property="version" column="VERSION" />
+		<result property="resourceType" column="RESOURCETYPE" />
+		<result property="depends" column="DEPENDS" />
+		<result property="acvtiveMode" column="ACVTIVEMODE" />
+		<result property="result" column="RESULT" />
+		<result property="resultReason" column="RESULTREASON" />
+	</resultMap>
+
+	<insert id="insertResMapping"
+		parameterType="com.huawei.icto.commonsvc.decomposer.model.ResMapping">
+		INSERT INTO SRV_RES_MAPPING
+		(TENANTID,SERVICEID,RESOURCEID,RESOURCELABEL,TYPE,VERSION,RESOURCETYPE,DEPENDS,ACVTIVEMODE,RESULT,RESULTREASON)
+		VALUES(#{tenantID},#{serviceID},#{resourceID},#{resourceLabel},#{type},#{version},#{resourceType},#{depends},#{acvtiveMode},#{result},#{resultReason})
+	</insert>
+	<delete id="deleteResMapping"
+		parameterType="com.huawei.icto.commonsvc.decomposer.model.ResMapping">
+		DELETE FROM SRV_RES_MAPPING WHERE SERVICEID=#{serviceID} AND RESOURCELABEL=#{resourceLabel}
+	</delete>
+	
+	<update id="updateResMapping"
+		parameterType="com.huawei.icto.commonsvc.decomposer.model.ResMapping">
+		UPDATE SRV_RES_MAPPING
+		<set>
+			<if test="result != null">
+				RESULT = #{result},
+			</if>
+			<if test="resultReason != null">
+				RESULTREASON = #{resultReason},
+			</if>
+			<if test="resourceID != null">
+				RESOURCEID = #{resourceID},
+			</if>
+			<if test="acvtiveMode != null">
+				ACVTIVEMODE = #{acvtiveMode}
+			</if>
+		</set>
+		WHERE SERVICEID=#{serviceID} AND RESOURCELABEL=#{resourceLabel}
+	</update>
+
+	<select id="getResMapping" parameterType="String"
+		resultType="com.huawei.icto.commonsvc.decomposer.model.ResMapping">
+		SELECT * FROM SRV_RES_MAPPING WHERE RESOURCEID =#{resID} AND TENANTID=#{tenantID}
+	</select>
+
+	<select id="getResMappings" parameterType="String"
+		resultType="com.huawei.icto.commonsvc.decomposer.model.ResMapping">
+		SELECT * FROM SRV_RES_MAPPING WHERE SERVICEID =#{serviceID} AND TENANTID=#{tenantID}
+	</select>
+
+	<insert id="batInsertResMapping" parameterType="java.util.List">
+		INSERT INTO SRV_RES_MAPPING(TENANTID,SERVICEID,RESOURCEID,RESOURCELABEL,
+		TYPE,VERSION,RESOURCETYPE,DEPENDS,ACVTIVEMODE,RESULT,RESULTREASON)
+		VALUES
+	    <foreach collection="list" item="item" index="index" separator="," >
+	        (#{item.tenantID},#{item.serviceID},#{item.resourceID},#{item.resourceLabel},
+	        #{item.type},#{item.version},#{item.resourceType},#{item.depends},
+	        #{item.acvtiveMode},#{item.result},#{item.resultReason})
+	    </foreach>
+	</insert>
+
+	<delete id="batDeleteResMapping" parameterType="java.util.List">
+		DELETE FROM SRV_RES_MAPPING WHERE (SERVICEID,RESOURCELABEL) IN	
+		<foreach collection="list" item="item" index="index" open="(" separator="," close=")" >
+			(#{item.serviceID},#{item.resourceLabel})
+	    </foreach>
+    </delete>
+</mapper>

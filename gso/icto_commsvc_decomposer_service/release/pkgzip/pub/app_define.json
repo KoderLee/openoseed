@@ -1,0 +1,80 @@
+{
+    "fileVersion": "1",
+    "name": "ServiceDecomposer",
+    "description": "Service Decomposer",
+    "requireDiskSize": 30,
+    "rtspSoftLink": true,
+    "dependency": {
+        "Bus": "~1.3.20.0",
+        "Privilege": "~1.3.20.0"
+    },
+    "upgrade": {
+        "use": {
+            "3rdparty": "~1.3.20.0",
+            "jre": "~1.3.20.0",
+            "common": "~1.3.20.0",
+            "framework": "~1.3.20.0",
+            "rtsp_icto_commsvc_common":"~1.0.0.0"
+        },
+        "check": {
+            "command": ["${APP_ROOT}/upgrade/check.sh"],
+            "timeout": 30
+        },
+        "upgrade": {
+            "command": ["${APP_ROOT}/upgrade/init.sh"],
+            "timeout": 300
+        }
+    },
+    "processes": {
+        "ServiceDecomposerApp": {
+            "use": {
+                "3rdparty": "~1.3.20.0",
+                "jre": "~1.3.20.0",
+                "nginx": "~1.3.20.0",
+                "common": "~1.3.20.0",
+                "framework": "~1.3.20.0",
+                "rtsp_biz": "~5.1.0",
+                "rtsp_icto_commsvc_common":"~1.0.0.0"
+            },
+            "mode": "cluster",
+            "cpu": 0.5,
+            "memory": 512,
+            "memoryLimit": 1024,
+            "patterns": [
+             "/rest/decomposer/v1/rules",
+             "/rest/decomposer/v1/tasks",
+             "/rest/decomposer/v1/services",
+             "!!/decomposer",
+             "/rest/decomposer"
+            ],
+            "useAdditionalEnv": ["_APP_LOG_DIR", "_APP_TMP_DIR", "_APP_SHARE_DIR"],
+            "protocols": {
+                "IR": "http"
+            },
+            "commands": {
+                "start": ["${APP_ROOT}/bin/start.sh"],
+                "stop": ["${APP_ROOT}/bin/stop.sh"]
+            }
+        }
+    },
+    "databases": {
+        "servicedecomposerdb": {
+            "type": ["mysql"],
+            "serviceName": "ossdbsvr",
+            "dataSize": 256,
+            "logSize": 128,
+            "sharding": false,
+            "defaultShardingNumber": 1
+        }
+    },
+    "redis": {
+        "sdDB": {
+            "serviceName":"sdDB",
+            "type": "cache",
+            "memory": 256,
+            "dataSize": 256,
+            "sharding": false,
+            "defaultShardingNumber": 1
+        }
+    }    
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:osgi="http://www.springframework.org/schema/osgi"
+ xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+ xmlns:ctx="http://www.springframework.org/schema/context" xmlns:oms="http://www.openo.org/schema/oms"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xsi:schemaLocation="
+	 http://www.springframework.org/schema/beans 
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	 http://www.springframework.org/schema/osgi
+	 http://www.springframework.org/schema/osgi/spring-osgi.xsd
+	 http://www.springframework.org/schema/context 
+	 http://www.springframework.org/schema/context/spring-context.xsd
+	 http://www.springframework.org/schema/osgi-compendium 
+	 http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+	 http://www.openo.org/schema/oms
+	 http://www.openo.org/schema/oms/oms.xsd">
+
+	<context:component-scan base-package="org.openo.sdno.svc.vpn.l2vpn" />
+	<context:component-scan base-package="org.openo.sdno.cbb.sdnwan.dao" />
+	
+    <osgi:reference id="invDAO"
+            interface="org.openo.sdno.inventory.sdk.inf.IInvDAO" bean-name="invDAOImpl">
+    </osgi:reference>
+    <osgi:reference id="controllerService"
+        interface="org.openo.sdno.inventory.sdk.inf.IControllerService" bean-name="controllerServiceImpl">
+    </osgi:reference>
+    <osgi:reference id="invServices"
+        interface="org.openo.sdno.inventory.sdk.inf.IInventoryDaoService" bean-name="invServicesImpl">
+    </osgi:reference>
+	<bean id="L2VpnSvcRestModule" class="org.openo.sdno.svc.vpn.l2vpn.L2VpnSvcRoaModule" init-method="start"
+		destroy-method="stop">
+		<property name="roaResList">
+			<list>
+				<ref bean="L2VpnServiceAPIController" />
+				<ref bean="L2vpnTpAPIController" />
+                <ref bean="TeServiceAPIController" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="L2VpnServiceAPIController" class="org.openo.sdno.svc.vpn.l2vpn.rest.L2vpnServiceAPIController">
+		<property name="service" ref="IL2vpnBussiController" />
+	</bean>
+	<bean id="L2vpnTpAPIController" class="org.openo.sdno.svc.vpn.l2vpn.rest.L2vpnTpAPIController">
+		<property name="service" ref="IL2vpnBussiController" />
+	</bean>
+	<bean id="IL2vpnBussiController" class="org.openo.sdno.svc.vpn.l2vpn.service.impl.L2vpnBussiControllerImpl">
+	</bean>
+
+    <bean id="TeServiceAPIController" class="org.openo.sdno.svc.vpn.l2vpn.rest.TeServiceAPIController">
+        <property name="service" ref="IL2vpnTeService" />
+    </bean>
+	<bean id="IL2vpnTeService" class="org.openo.sdno.svc.vpn.l2vpn.service.impl.L2vpnTeService"></bean>
+</beans>
+
+
+
+
+

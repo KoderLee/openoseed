@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.openo.crossdomain.servicemgr.mapper.ServiceParameterMapper">
+	<resultMap type="org.openo.crossdomain.servicemgr.model.servicemo.ServiceParameter" id="SvcParamResultMap">
+		<result property="id" column="ID"/>
+		<result property="tenant_id" column="TENANT_ID"/>
+		<result property="service_id" column="SERVICE_ID"/>
+		<result property="parameter_name" column="PARAMETER_NAME"/>
+		<result property="parameter_value" column="PARAMETER_VALUE"/>
+		<result property="parameter_type" column="PARAMETER_TYPE"/>
+		<result property="flag" column="FLAG"/>
+	</resultMap>
+	<insert id="insert" parameterType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceParameter">
+		INSERT INTO
+		T_SVCMGR_SERVICEPARAM
+		(ID,TENANT_ID,SERVICE_ID,PARAMETER_NAME,PARAMETER_VALUE,PARAMETER_TYPE,FLAG)
+		VALUES(#{id},#{tenant_id},#{service_id},#{parameter_name},#{parameter_value},#{parameter_type},#{flag})
+	</insert>
+	<delete id="delete" parameterType="list">
+		DELETE FROM T_SVCMGR_SERVICEPARAM WHERE ID IN
+		<foreach collection="list" item="id" open="(" separator="," 
+			close=")">#{id}</foreach>
+	</delete>
+	
+	<delete id="deleteByServiceID">
+		DELETE FROM T_SVCMGR_SERVICEPARAM WHERE TENANT_ID = #{tenant_id} AND SERVICE_ID = #{service_id}
+	</delete> 
+	
+	<update id="update" parameterType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceParameter">
+		UPDATE
+		T_SVCMGR_SERVICEPARAM SET
+		PARAMETER_VALUE=#{parameter_value}
+		WHERE SERVICE_ID = #{service_id} AND  PARAMETER_NAME = #{parameter_name}
+	</update>
+	<select id="getServiceParameterById" parameterType="string"
+		resultType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceParameter">
+		SELECT * FROM T_SVCMGR_SERVICEPARAM WHERE ID = #{id}  
+	</select>
+	<select id="getServiceParameterList" resultMap="SvcParamResultMap">
+		SELECT * FROM T_SVCMGR_SERVICEPARAM
+		<where>
+			<if test="tenant_id != null" >
+				TENANT_ID = #{tenant_id} AND SERVICE_ID IN
+			</if>
+		</where>
+		<foreach item="item" index="index" collection="svcIDs" open="(" separator="," close=")"> 
+			#{item} 
+		</foreach>
+	</select>
+
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.openo.crossdomain.servicemgr.mapper.ServiceModelMapper">
+	
+	<resultMap type="org.openo.crossdomain.servicemgr.model.servicemo.ServiceModel" id="serviceModelResultMap">
+        <result property="service_id" column="ID" />
+        <result property="tenant_id" column="TENANT_ID" />
+        <result property="project_id" column="PROJECT_ID" />
+        <result property="service_definition_id" column="SERVICE_DEF_ID" />
+        <result property="service_type" column="SERVICE_TYPE" />
+		<result property="template_id" column="TEMPLATE_ID" />
+		<result property="name" column="NAME" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="created_at" column="CREATED_AT" />
+		<result property="update_time" column="UPDATE_TIME" />
+		<result property="active_status" column="ACTIVE_STATUS" />
+		<result property="status" column="STATUS" />
+    </resultMap>
+	
+	<insert id="insert" parameterType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceModel">
+		INSERT INTO
+		T_SVCMGR_SERVICEMODEL
+		(ID,TENANT_ID,PROJECT_ID,SERVICE_DEF_ID,SERVICE_TYPE,TEMPLATE_ID,NAME,DESCRIPTION,CREATED_AT,UPDATE_TIME,ACTIVE_STATUS,STATUS)
+		VALUES(#{service_id},#{tenant_id},#{project_id},#{service_definition_id},#{service_type},#{template_id},#{name},#{description},#{created_at},#{update_time},#{active_status},#{status})
+	</insert>
+	
+	<delete id="deleteByServiceID">
+		DELETE FROM T_SVCMGR_SERVICEMODEL WHERE TENANT_ID = #{tenant_id} AND  ID = #{service_id}
+	</delete> 
+	
+	<update id="update" parameterType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceModel">
+		UPDATE
+		T_SVCMGR_SERVICEMODEL 
+		<set >
+			<if test="name != null" >
+        		NAME = #{name},
+			</if>
+			<if test="description != null" >
+        		DESCRIPTION = #{description},
+			</if>
+			<if test="update_time != null" >
+        		UPDATE_TIME = #{update_time},
+			</if>
+			<if test="active_status != null" >
+        		ACTIVE_STATUS = #{active_status},
+			</if>
+			<if test="status != null" >
+        		STATUS = #{status},
+			</if>
+		</set>
+		WHERE ID=#{service_id}
+	</update>
+	
+	<select id="getServiceModelByServiceId" resultMap="serviceModelResultMap">
+    SELECT * FROM T_SVCMGR_SERVICEMODEL WHERE TENANT_ID = #{tenant_id} AND  ID = #{service_id}
+    </select>
+	
+	<select id="getServiceModelByTenantId" resultMap="serviceModelResultMap">
+    SELECT * FROM T_SVCMGR_SERVICEMODEL WHERE TENANT_ID = #{tenant_id}
+    </select>
+    
+    <select id="getServiceModelByTemplateId" resultMap="serviceModelResultMap">
+    SELECT * FROM T_SVCMGR_SERVICEMODEL WHERE TENANT_ID = #{tenant_id} AND TEMPLATE_ID = #{template_id}
+    </select>
+    
+</mapper>

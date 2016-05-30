@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="redisInitializer" class="org.openo.ict.drivermgmt.persistence.RedisInitializer"
+          init-method="onBeanInit"
+          destroy-method="onBeanDestroy">
+    </bean>
+
+    <bean id="checkHeartBeatThread" class="org.openo.ict.drivermgmt.dispatch.CheckHeartBeatThread"
+          init-method="onBeanInit"
+          destroy-method="onBeanDestroy">
+    </bean>
+
+    <bean id="syncDBThread" class="org.openo.ict.drivermgmt.persistence.SyncDBThread"
+          init-method="onBeanInit"
+          destroy-method="onBeanDestroy">
+    </bean>
+
+    <!-- database -->
+    <bean id="springContextUtil" class="org.openo.ict.drivermgmt.persistence.SpringContextUtil"/>
+
+    <bean id="driverMgrMapperMysql" class="org.openo.ict.drivermgmt.persistence.dao.impl.DriverMgrMapperMysql">
+        <property name="mapperManager" ref="mapperManager"/>
+    </bean>
+
+    <!-- rest api -->
+    <bean id="driverMgrServiceInternal" class="org.openo.ict.drivermgmt.rest.DriverMgmtService">
+    </bean>
+
+</beans>   
+
+	
+
+
+

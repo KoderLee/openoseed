@@ -1,0 +1,214 @@
+[ERROR]_2016-03-24 16:05:38 :houhouhahei
+  [ERROR]_2016-03-24 16:05:38 :houhouhahei
+  [ERROR]_2016-03-24 16:05:38 :houhouhahei RetCode: failed
+  [ERROR]_2016-03-24 16:05:39 :CheckAccessible failed for null serviceID!
+  [ERROR]_2016-03-24 16:05:39 :CheckAccessible failed for null tenantID!
+  [ERROR]_2016-03-24 16:05:39 :module start error
+  java.lang.RuntimeException
+	at com.huawei.icto.commonsvc.decomposer.module.IBaseModuleTest$1.doStart(IBaseModuleTest.java:26)
+	at com.huawei.icto.commonsvc.decomposer.module.AbsBaseModule.start(AbsBaseModule.java:15)
+	at com.huawei.icto.commonsvc.decomposer.module.IBaseModuleTest.testStart(IBaseModuleTest.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:120)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:103)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:169)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:350)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1021)
+[ERROR]_2016-03-24 16:05:39 :module start stop
+  java.lang.RuntimeException
+	at com.huawei.icto.commonsvc.decomposer.module.IBaseModuleTest$1.doStop(IBaseModuleTest.java:31)
+	at com.huawei.icto.commonsvc.decomposer.module.AbsBaseModule.stop(AbsBaseModule.java:28)
+	at com.huawei.icto.commonsvc.decomposer.module.IBaseModuleTest.testStop(IBaseModuleTest.java:43)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:120)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:103)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:169)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:350)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1021)
+[ERROR]_2016-03-24 16:05:39 :fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d9nhR1rHwWnW99n1DkmvDL0AP8IA3qPjfsn1bkrjKxmLKz0ZNzUjdCIZwsrBtEXh9GuA7EQhF9pywdQhPEUiqkIyN1IA-EUBtLPHD3n1Rkrjcdn1mvPjbsrjffenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d9nhR1rHwWnW99n1DkmvDL0AP8IA3qPjfsn1bkrjKxmLKz0ZNzUjdCIZwsrBtEXh9GuA7EQhF9pywdQhPEUiqkIyN1IA-EUBtLPHD3n1Rkrjcdn1mvPjbsrjffenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d9nhR1rHwWnW99n1DkmvDL0AP8IA3qPjfsn1bkrjKxmLKz0ZNzUjdCIZwsrBtEXh9GuA7EQhF9pywdQhPEUiqkIyN1IA-EUBtLPHD3n1Rkrjcdn1mvPjbsrjf
+  [WARN ]_2016-03-24 16:05:39 :use default EnvConfBuilder.
+  [ERROR]_2016-03-24 16:05:39 :decrypt cipher is empty!
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: false
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Boolean' value 'false' to type 'Boolean'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Boolean
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Byte'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Byte value '0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value:  
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Character' value ' ' to type 'Character'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Character
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Double'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Double value '0.0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Float'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Float value '0.0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Integer'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Integer
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Long'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Long value '0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Short'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Short value '0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0.0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'BigDecimal' value '0.0' to type 'BigDecimal'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a BigDecimal
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'BigInteger' value '0' to type 'BigInteger'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a BigInteger
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: false
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Boolean' value 'false' to type 'Boolean'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Boolean
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Byte'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Byte value '0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value:  
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Character' value ' ' to type 'Character'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Character
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Double'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Double value '0.0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Float'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Float value '0.0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Integer'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Integer
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Long'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Long value '0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer' value '0' to type 'Short'
+  [DEBUG]_2016-03-24 16:05:39 :    Converted to Short value '0'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: 
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'String' value '' to type 'String'
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Z@359430ca
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'boolean[]' value '[Z@359430ca' to type 'boolean[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a boolean[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [B@140f3941
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'byte[]' value '[B@140f3941' to type 'byte[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a byte[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [C@7377e4b0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'char[]' value '[C@7377e4b0' to type 'char[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a char[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [D@44471a09
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'double[]' value '[D@44471a09' to type 'double[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a double[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [F@17fe67e4
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'float[]' value '[F@17fe67e4' to type 'float[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a float[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [I@3f56b60a
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'int[]' value '[I@3f56b60a' to type 'int[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a int[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [J@55c96b02
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'long[]' value '[J@55c96b02' to type 'long[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a long[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [S@1a907c4e
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'short[]' value '[S@1a907c4e' to type 'short[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a short[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.math.BigDecimal;@3d0f282
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'BigDecimal[]' value '[Ljava.math.BigDecimal;@3d0f282' to type 'BigDecimal[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a BigDecimal[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.math.BigInteger;@ae136c3
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'BigInteger[]' value '[Ljava.math.BigInteger;@ae136c3' to type 'BigInteger[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a BigInteger[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.Boolean;@47d241c9
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Boolean[]' value '[Ljava.lang.Boolean;@47d241c9' to type 'Boolean[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Boolean[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.Byte;@3cdd17f5
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Byte[]' value '[Ljava.lang.Byte;@3cdd17f5' to type 'Byte[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Byte[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.Character;@574ff50a
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Character[]' value '[Ljava.lang.Character;@574ff50a' to type 'Character[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Character[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.Double;@4260904e
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Double[]' value '[Ljava.lang.Double;@4260904e' to type 'Double[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Double[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.Float;@51a212ed
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Float[]' value '[Ljava.lang.Float;@51a212ed' to type 'Float[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Float[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.Integer;@6788af79
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Integer[]' value '[Ljava.lang.Integer;@6788af79' to type 'Integer[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Integer[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.Long;@3eb86609
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Long[]' value '[Ljava.lang.Long;@3eb86609' to type 'Long[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Long[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.Short;@3c32f90a
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Short[]' value '[Ljava.lang.Short;@3c32f90a' to type 'Short[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Short[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.String;@367c1e66
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'String[]' value '[Ljava.lang.String;@367c1e66' to type 'String[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a String[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.lang.Class;@eafd67c
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Class[]' value '[Ljava.lang.Class;@eafd67c' to type 'Class[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Class[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.util.Date;@37b79249
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Date[]' value '[Ljava.util.Date;@37b79249' to type 'Date[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Date[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.util.Calendar;@2d2cad48
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'Calendar[]' value '[Ljava.util.Calendar;@2d2cad48' to type 'Calendar[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a Calendar[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.io.File;@672a1f0
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'java.io.File[]' value '[Ljava.io.File;@672a1f0' to type 'java.io.File[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a java.io.File[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.sql.Date;@4367be7c
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'java.sql.Date[]' value '[Ljava.sql.Date;@4367be7c' to type 'java.sql.Date[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a java.sql.Date[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.sql.Time;@347e4f51
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'java.sql.Time[]' value '[Ljava.sql.Time;@347e4f51' to type 'java.sql.Time[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a java.sql.Time[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.sql.Timestamp;@16ecb69e
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'java.sql.Timestamp[]' value '[Ljava.sql.Timestamp;@16ecb69e' to type 'java.sql.Timestamp[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a java.sql.Timestamp[]
+  [DEBUG]_2016-03-24 16:05:39 :Setting default value: [Ljava.net.URL;@414fabe1
+  [DEBUG]_2016-03-24 16:05:39 :Converting 'java.net.URL[]' value '[Ljava.net.URL;@414fabe1' to type 'java.net.URL[]'
+  [DEBUG]_2016-03-24 16:05:39 :    No conversion required, value is already a java.net.URL[]
+  [WARN ]_2016-03-24 16:05:39 :Tried to assign property tenantid:java.lang.String to bean of class com.huawei.icto.commonsvc.decomposer.model.ResMapping
+  [WARN ]_2016-03-24 16:05:39 :Tried to assign property service_id:java.lang.String to bean of class com.huawei.icto.commonsvc.decomposer.model.ResMapping
+  

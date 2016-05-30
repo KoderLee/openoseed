@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:osgi="http://www.springframework.org/schema/osgi"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/osgi
+    http://www.springframework.org/schema/osgi/spring-osgi.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+    <bean class="org.openo.crossdomain.servicemgr.activator.Activator"></bean>
+    
+    <bean class="org.openo.crossdomain.servicemgr.util.service.SpringContextUtils"></bean>
+
+    <osgi:reference id="mapperMangerref"
+        interface="org.openo.baseservice.mybatis.session.MapperManager">
+    </osgi:reference>
+
+    <bean id="servicemanager"
+        class="org.openo.crossdomain.servicemgr.service.impl.ServiceManagerImpl">
+        <property name="serviceModelDao" ref="serviceModelDao"></property>
+        <property name="catalogProxy" ref="catalogProxy"></property>
+        <property name="svcDecomposerProxy" ref="svcDecomposerProxy"></property>
+        <property name="serviceChecker" ref="serviceChecker"></property>
+        <property name="createJobSch" ref="createJobSch"></property>
+        <property name="parameterManager" ref="parameterManager"></property>
+        <property name="operationManager" ref="operationManager"></property>
+    </bean>
+    
+    <bean id="parameterManager"
+        class="org.openo.crossdomain.servicemgr.service.impl.ParameterManagerImpl">
+        <property name="catalogProxy" ref="catalogProxy"></property>
+        <property name="serviceParameterDao" ref="serviceParameterDao"></property>
+        <property name="serviceListParameterDao" ref="serviceListParameterDao"></property>
+        <property name="widgetTypeManager" ref="widgetTypeManager"></property>
+    </bean>
+    
+    <bean id="catalogInfoMgr" class="org.openo.crossdomain.servicemgr.service.impl.CatalogInfoMgrImpl">
+        <property name="serviceModelDao" ref="serviceModelDao"></property>
+        <property name="catalogProxy" ref="catalogProxy"></property>
+    </bean>
+
+    <bean id="createJobSch"
+        class="org.openo.crossdomain.servicemgr.job.impl.CreateJobSchImpl">
+        <property name="svcDecomposerProxy" ref="svcDecomposerProxy"></property>
+        <property name="scheduler" ref="schedulerrefBean"></property>
+        <property name="serviceOperationDao" ref="serviceOperationDao"></property>
+    </bean>
+    
+    <bean id="createQueryProgressJob" class="org.openo.crossdomain.servicemgr.job.impl.CreateQueryProgressJob">
+        <property name="jobDao" ref="jobDao"></property>
+        <property name="serviceModelDao" ref="serviceModelDao"></property>
+        <property name="operationManager" ref="operationManager"></property>
+    </bean>
+	
+	<bean id="activeQueryProgressJob" class="org.openo.crossdomain.servicemgr.job.impl.ActiveQueryProgressJob">
+	    <property name="jobDao" ref="jobDao"></property>
+	    <property name="serviceModelDao" ref="serviceModelDao"></property>
+	    <property name="operationManager" ref="operationManager"></property>
+    </bean>
+
+    <bean id="updateQueryProgressJob" class="org.openo.crossdomain.servicemgr.job.impl.UpdateQueryProgressJob">
+        <property name="jobDao" ref="jobDao"></property>
+        <property name="serviceModelDao" ref="serviceModelDao"></property>
+        <property name="operationManager" ref="operationManager"></property>
+    </bean>
+	
+    <bean id="deactivQueryProgressJob" class="org.openo.crossdomain.servicemgr.job.impl.DeactivQueryProgressJob">
+        <property name="jobDao" ref="jobDao"></property>
+        <property name="serviceModelDao" ref="serviceModelDao"></property>
+        <property name="operationManager" ref="operationManager"></property>
+    </bean>
+	
+    <bean id="deleteQueryProgressJob" class="org.openo.crossdomain.servicemgr.job.impl.DeleteQueryProgressJob">
+        <property name="jobDao" ref="jobDao"></property>
+        <property name="serviceModelDao" ref="serviceModelDao"></property>
+        <property name="serviceParameterDao" ref="serviceParameterDao"></property>
+        <property name="catalogProxy" ref="catalogProxy"></property>
+        <property name="operationManager" ref="operationManager"></property>
+    </bean>
+	
+	<bean id="operationManager" class="org.openo.crossdomain.servicemgr.service.impl.ServiceOperationManagerImpl">
+		<property name="serviceOperationDao" ref="serviceOperationDao"></property>
+	</bean>	
+	
+    <bean id="ServicemgrRoaModule" class="org.openo.crossdomain.servicemgr.roa.ServicemgrRoaModule">
+        <property name="servicemanager" ref="servicemanager"></property>
+        <property name="operationManager" ref="operationManager"></property>        
+    </bean>
+    
+    <bean id="serviceModelDao" class="org.openo.crossdomain.servicemgr.dao.impl.ServiceModelDaoImpl">
+        <property name="mapperManager" ref="mapperMangerref"></property>
+        <property name="serviceModelCache" ref="serviceModelCache"></property>
+        <property name="serviceParameterDao" ref="serviceParameterDao"></property>
+    </bean>
+
+    <bean id="serviceParameterDao"
+        class="org.openo.crossdomain.servicemgr.dao.impl.ServiceParameterDaoImpl">
+        <property name="mapperManager" ref="mapperMangerref"></property>
+        <property name="serviceListParameterDao" ref="serviceListParameterDao"></property>
+    </bean> 
+    
+    <bean id="serviceListParameterDao"
+        class="org.openo.crossdomain.servicemgr.dao.impl.ServiceListParameterDaoImpl">
+        <property name="mapperManager" ref="mapperMangerref"></property>
+    </bean> 
+    
+    <bean id="serviceOperationDao" class="org.openo.crossdomain.servicemgr.dao.impl.ServiceOperationDaoImpl">
+        <property name="mapperManager" ref="mapperMangerref"></property>
+    </bean>    
+    
+    <bean id="catalogProxy" class="org.openo.crossdomain.servicemgr.restrepository.impl.CatalogProxyImpl"></bean>
+    
+    <bean id="serviceChecker" class="org.openo.crossdomain.servicemgr.check.impl.ServiceCheckerImpl">
+        <property name="catalogProxy" ref="catalogProxy"></property>
+    </bean>
+    
+    <bean id="svcDecomposerProxy" class="org.openo.crossdomain.servicemgr.restrepository.impl.ServiceDecomposerProxy">
+    </bean>
+    
+    <bean id="serviceModelCache" class="org.openo.crossdomain.servicemgr.dao.impl.ServiceModelCacheImpl"></bean>
+    
+	<bean id="jobDao" class="org.openo.crossdomain.commsvc.jobscheduler.dao.impl.JobDaoImpl">
+		<property name="mapperManager" ref="mapperMangerref"></property>
+		<property name="jobContextDao" ref="jobContextDao"></property>
+		<property name="dbName" value="servicemgrdb"></property>
+	</bean>
+	
+	<bean id="jobContextDao" class="org.openo.crossdomain.commsvc.jobscheduler.dao.impl.JobContextDaoImpl">
+		<property name="mapperManager" ref="mapperMangerref"></property>
+		<property name="dbName" value="servicemgrdb"></property>
+	</bean>
+
+	<bean id="schedulerInstanceDao"
+		class="org.openo.crossdomain.commsvc.jobscheduler.dao.impl.SchedulerInstanceDaoImpl">
+		<property name="mapperManager" ref="mapperMangerref"></property>
+		<property name="dbName" value="servicemgrdb"></property>
+	</bean>
+
+	<bean id="jobSerializer" class="org.openo.crossdomain.servicemgr.job.impl.JobSerializerImpl">
+	</bean>
+	<bean id ="widgetTypeManager" class="org.openo.crossdomain.servicemgr.service.impl.WidgetTypeManagerImpl"></bean>
+	
+	<bean id="schedulerrefBean"
+		class="org.openo.crossdomain.commsvc.jobscheduler.core.impl.SchedulerImpl">
+		<property name="jobDao" ref="jobDao"></property>
+		<property name="schedulerInstanceDao" ref="schedulerInstanceDao"></property>
+		<property name="jobSerializer" ref="jobSerializer"></property>
+		<property name="poolSize" value="20"></property>
+		<property name="refreshTimeCycle" value="30"></property>
+		<property name="pollingDeadInsCycle" value="60"></property>
+	</bean>
+
+	<osgi:service id="schedulerref"
+		interface="org.openo.crossdomain.commsvc.jobscheduler.core.inf.IScheduler"
+		ref="schedulerrefBean" />
+</beans>

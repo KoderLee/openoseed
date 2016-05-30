@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.openo.nfvo</groupId>
+        <artifactId>vimadapter-service-root</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>vimadapter-service</artifactId>
+    <name>VimDriverService</name>
+    <packaging>war</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.36</version>
+        </dependency>
+	<dependency>
+		<groupId>vmware.sdk</groupId>
+		<artifactId>com.vmware.vloud.sdk</artifactId>
+		<version>8.0.0</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>vmware.sdk</groupId>
+		<artifactId>com.vmware.vcloud.api.rest.schema</artifactId>
+		<version>8.0.0</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>vmware.sdk</groupId>
+		<artifactId>com.vmware.vcloud.httpclient</artifactId>
+		<version>4.5</version>
+	</dependency>
+	
+	<dependency>
+	   	<groupId>org.apache.httpcomponents</groupId>
+	   	<artifactId>httpcore</artifactId>
+	   	<version>4.4.1</version>
+   </dependency>	
+   
+   	<dependency>
+		<groupId>vmware.sdk</groupId>
+		<artifactId>vi</artifactId>
+		<version>5.1.0</version>
+	</dependency>     
+	
+	<dependency>
+		<groupId>org.dom4j</groupId>
+        <artifactId>com.springsource.org.dom4j</artifactId>
+        <version>1.6.1</version>
+	</dependency>  
+	
+    <dependency>
+	   <groupId>org.apache.commons</groupId>
+		<artifactId>com.springsource.org.apache.commons.httpclient</artifactId>
+        <version>3.1.0.3500</version> 
+	</dependency>        
+        
+    </dependencies>
+
+</project>

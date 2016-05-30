@@ -1,0 +1,10 @@
+{
+	"decomposer:rules:register:modify": "@",
+	"decomposer:rules:get": "@",
+	"decomposer:rules:unregister:modify": "@",
+	"decomposer:tasks:create": "@",
+	"decomposer:tasks:get": "@",
+	"decomposer:resources:get": "@",
+	"decomposer:task:get": "@",
+	"decomposer:tasklogs:get": "@"
+}

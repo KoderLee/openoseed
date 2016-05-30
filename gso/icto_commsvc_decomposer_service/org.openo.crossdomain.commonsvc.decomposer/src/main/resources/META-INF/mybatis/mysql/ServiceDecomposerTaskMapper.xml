@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2016, Huawei Technologies Co., Ltd.
+   
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.icto.commonsvc.decomposer.dao.mapper.ServiceDecomposerTaskMapper">
+    <resultMap type="com.huawei.icto.commonsvc.decomposer.model.ServiceDecomposerTask" id="sdTaskResultMap">
+        <result property="taskID" column="TASKID"/>
+        <result property="serviceID" column="SERVICEID"/>
+        <result property="tenantID" column="TENANTID"/>
+        <result property="srvVersion" column="SRVVERSION"/>
+        <result property="operType" column="OPERTYPE"/>
+        <result property="seJobID" column="SEJOBID"/>
+        <result property="serviceContent" column="SERVICECONTENT"/>
+        <result property="progress" column="PROGRESS"/>
+        <result property="result" column="RESULT"/>
+        <result property="resultReason" column="RESULTREASON"/>
+    </resultMap>
+    
+    <insert id="insertSrvDecomposerTask"
+            parameterType="com.huawei.icto.commonsvc.decomposer.model.ServiceDecomposerTask">
+        INSERT INTO DECOMPOSER_TASK (TASKID,SERVICEID,TENANTID,SRVVERSION,OPERTYPE,SEJOBID,SERVICECONTENT,PROGRESS,RESULT,RESULTREASON)
+        VALUES(#{taskID},#{serviceID},#{tenantID},#{srvVersion},#{operType},#{seJobID},#{serviceContent},#{progress},#{result},#{resultReason})
+    </insert>
+    
+    <delete id="deleteSrvDecomposerTask"
+            parameterType="com.huawei.icto.commonsvc.decomposer.model.ServiceDecomposerTask">
+        DELETE FROM DECOMPOSER_TASK WHERE SERVICEID=#{serviceID} AND TENANTID=#{tenantID} AND SRVVERSION=#{srvVersion}
+    </delete>
+    
+    <update id="updateSrvDecomposerTask"
+            parameterType="com.huawei.icto.commonsvc.decomposer.model.ServiceDecomposerTask">
+        UPDATE DECOMPOSER_TASK SET SEJOBID=#{seJobID},SERVICECONTENT=#{serviceContent},PROGRESS=#{progress},RESULT=#{result},RESULTREASON=#{resultReason} WHERE TASKID= #{taskID}
+    </update>
+    
+    <select id="getSrvDecomposerTask" parameterType="String" resultMap="sdTaskResultMap">
+        SELECT * FROM DECOMPOSER_TASK WHERE TENANTID=#{tenantID}
+		<if test="serviceID != null" >
+			AND SERVICEID = #{serviceID}
+		</if>
+    </select>
+
+    <select id="qrySrvDecomposerTask" parameterType="String" resultMap="sdTaskResultMap">
+        SELECT * FROM DECOMPOSER_TASK WHERE TASKID=#{taskID} AND TENANTID=#{tenantID}
+    </select>
+    
+    <insert id="batInsertSrvDecomposerTask" parameterType="java.util.List">
+        INSERT INTO DECOMPOSER_TASK(TASKID,SERVICEID,TENANTID,SRVVERSION,OPERTYPE,
+        SEJOBID,SERVICECONTENT,PROGRESS,RESULT,RESULTREASON) VALUES
+	    <foreach collection="list" item="item" index="index" separator="," >
+	        (#{item.taskID},#{item.serviceID},#{item.tenantID},#{item.srvVersion},#{item.operType},
+	        #{item.seJobID},#{item.serviceContent},#{item.progress},#{item.result},#{item.resultReason})
+	    </foreach>
+    </insert>
+    
+    <delete id="batDeleteSrvDecomposerTask" parameterType="java.util.List">
+        DELETE FROM DECOMPOSER_TASK WHERE (TASKID,SERVICEID) IN
+		<foreach collection="list" item="item" index="index" open="(" separator="," close=")" >
+			(#{item.taskID},#{item.serviceID})
+	    </foreach>
+    </delete>
+</mapper>

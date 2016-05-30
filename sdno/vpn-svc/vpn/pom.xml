@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.openo.sdno</groupId>
+	<artifactId>svc.vpn</artifactId>
+	<packaging>pom</packaging>
+	<name>svc.vpn</name>
+        <version>2.0-SNAPSHOT</version>
+	<parent>
+		<artifactId>org.openo.sdno.project.pkg-common</artifactId>
+		<groupId>org.openo.sdno</groupId>
+		<version>3.0-SNAPSHOT</version>
+	</parent>
+	<properties>
+		<ver.oms>2.0.0.RELEASE</ver.oms>
+		<ver.sample>2.0-SNAPSHOT</ver.sample>
+	</properties>
+	
+	<modules>
+		<module>l3vpn-svc</module>
+		<module>l2vpn-svc</module>
+		<module>composedvpn-svc</module>
+	</modules>
+	
+	<build>
+		<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<argLine>-XX:-UseSplitVerifier</argLine>
+					</configuration>
+				</plugin>
+		</plugins>
+	</build>
+</project>

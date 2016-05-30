@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2016, Huawei Technologies Co., Ltd.
+   
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ -->
+
+<beans xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/osgi
+    http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+    <context:component-scan base-package="org.openo.crossdomain.commonsvc.executor"/>
+
+    <bean id="executorContextHelper"
+          class="org.openo.crossdomain.commonsvc.executor.common.util.ExecutorContextHelper">
+    </bean>
+
+    <osgi:reference id="mapperMgrRef" interface="org.openo.commonservice.mybatis.session.MapperManager"/>
+
+    <bean id="ServiceExecutorModule" class="org.openo.crossdomain.commonsvc.executor.service.ServiceExecutorModule"
+          init-method="start" destroy-method="stop">
+        <property name="roaResList">
+            <list>
+                <ref bean="serviceExecutorROAService"/>
+                <ref bean="pluginRuleROAService"/>
+                <ref bean="serviceExecutorTimingTask"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="serviceExecutorROAService" class="org.openo.crossdomain.commonsvc.executor.rest.ServiceExecutorROAService">
+        <property name="service" ref="serviceExecutorService"/>
+    </bean>
+
+    <bean id="pluginRuleROAService" class="org.openo.crossdomain.commonsvc.executor.rest.PluginRuleROAService">
+        <property name="service" ref="pluginRuleService"/>
+    </bean>
+
+    <bean id="serviceExecutorTimingTask" class="org.openo.crossdomain.commonsvc.executor.rest.ServiceExecutorTimingTask">
+        <property name="service" ref="timingTaskService"/>
+    </bean>
+
+    <bean id="preparer" class="org.openo.crossdomain.commonsvc.executor.service.Preparer">
+        <property name="preprocessors">
+            <list>
+                <ref bean="resourceCheck"/>
+                <ref bean="serviceCheck"/>
+                <ref bean="cycleDependencyCheck"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="basicCeckerForJob" class="org.openo.crossdomain.commonsvc.executor.service.impl.BasicCheckerForJob"/>
+    <bean id="basicCheckerForService" class="org.openo.crossdomain.commonsvc.executor.service.impl.BasicCheckerForService"/>
+    <bean id="resourceCheck" class="org.openo.crossdomain.commonsvc.executor.service.impl.ResourceCheck"/>
+    <bean id="serviceCheck" class="org.openo.crossdomain.commonsvc.executor.service.impl.ServiceCheck"/>
+    <bean id="cycleDependencyCheck" class="org.openo.crossdomain.commonsvc.executor.service.impl.CycleDependencyCheck"/>
+
+    <bean id="threadPool" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 核心线程数  -->
+        <property name="corePoolSize" value="10"/>
+        <!-- 最大线程数 -->
+        <property name="maxPoolSize" value="15"/>
+        <!-- 队列最大长度 >=mainExecutor.maxSize -->
+        <property name="queueCapacity" value="100"/>
+        <!-- 线程池维护线程所允许的空闲时间 -->
+        <property name="keepAliveSeconds" value="0"/>
+        <!-- 线程池对拒绝任务(无线程可用)的处理策略 -->
+        <property name="rejectedExecutionHandler">
+            <bean class="org.openo.crossdomain.commonsvc.executor.service.JobRejectedHandler"/>
+        </property>
+    </bean>
+
+    <!--  调度配置    -->
+    <bean id="scheduler"
+          class="org.openo.crossdomain.commsvc.jobscheduler.core.impl.SchedulerImpl">
+        <property name="jobDao" ref="jobDaoRef"/>
+        <property name="jobSerializer" ref="jobSerializerRef"/>
+        <property name="schedulerInstanceDao" ref="schedulerInstanceDaoRef"/>
+        <property name="poolSize" value="20"></property>
+        <property name="refreshTimeCycle" value="30"></property>
+        <property name="pollingDeadInsCycle" value="60"></property>
+    </bean>
+    <bean id="jobSerializerRef"
+          class="org.openo.crossdomain.commonsvc.executor.jobscheduler.job.impl.JobSerializerImpl">
+    </bean>
+    <bean id="schedulerInstanceDaoRef"
+          class="org.openo.crossdomain.commsvc.jobscheduler.dao.impl.SchedulerInstanceDaoImpl">
+        <property name="mapperManager" ref="mapperMgrRef"/>
+        <property name="dbName" value="serviceexecutordb"/>
+    </bean>
+
+</beans>
+
+
+
+

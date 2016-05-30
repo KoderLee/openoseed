@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (c) 2016, Huawei Technologies Co., Ltd.
+   
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huawei.icto.commonsvc.decomposer.dao.mapper.TaskLogMapper" >
+  <resultMap id="TaskLogResultMap" type="com.huawei.icto.commonsvc.decomposer.model.TaskLog" >
+    <result column="SEQUENCEID" property="sequenceID"  />
+    <result column="TASKID" property="taskID" />
+    <result column="TIMESTAP" property="timestap"  />
+    <result column="DESCRIPTION" property="description" />
+    <result column="RESULT" property="result"/>
+    <result column="RESULTREASON" property="resultReason" />
+  </resultMap>
+
+  <select id="getTaskLogByTaskID" resultMap="TaskLogResultMap" parameterType="com.huawei.icto.commonsvc.decomposer.model.TaskLog" >
+    select * from DECOMPOSER_TASK_LOG
+    where TASKID = #{taskID}
+  </select>
+  
+  <select id="getTaskLogCountByTaskID" parameterType="String" resultType="int" >
+    select count(*) from DECOMPOSER_TASK_LOG
+    where TASKID = #{taskID}
+  </select>
+  
+  <!-- 
+  <delete id="deleteByPrimaryKey" parameterType="com.huawei.icto.commonsvc.decomposer.model.TaskLog" >
+    delete from decomposer_task_log
+    where TASKID = #{taskID}
+  </delete> -->
+  
+  <insert id="insert" parameterType="com.huawei.icto.commonsvc.decomposer.model.TaskLog" >
+    insert into DECOMPOSER_TASK_LOG (SEQUENCEID, TASKID, TIMESTAP, 
+      DESCRIPTION, RESULT, RESULTREASON
+      )
+    values (#{sequenceID}, #{taskID}, #{timestap}, 
+      #{description}, #{result}, #{resultReason}
+      )
+  </insert>
+</mapper>

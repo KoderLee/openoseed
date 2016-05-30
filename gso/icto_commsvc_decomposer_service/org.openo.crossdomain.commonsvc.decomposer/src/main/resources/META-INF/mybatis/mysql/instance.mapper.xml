@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2016, Huawei Technologies Co., Ltd.
+   
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.huawei.icto.commsvc.jobscheduler.dao.mapper.ISchedulerInstanceMapper">
+
+	<resultMap
+		type="com.huawei.icto.commsvc.jobscheduler.model.SchedulerInstanceBean"
+		id="schedulerInstanceBeanResultMap">
+		<result property="instanceID" column="INSTANCE_ID" />
+		<result property="refreshedAt" column="REFRESHED_AT" />
+	</resultMap>
+
+	<update id="refresh">
+		<![CDATA[ 
+		INSERT INTO SD_INSTANCES
+		VALUES(#{instanceID},#{refreshedAt}) ON DUPLICATE KEY UPDATE
+		REFRESHED_AT = #{refreshedAt}
+		]]>
+	</update>
+
+
+	<delete id="delete" parameterType="String">
+		<![CDATA[
+		DELETE FROM SD_INSTANCES WHERE
+		INSTANCE_ID = #{instanceID}
+		]]>
+	</delete>
+
+	<select id="loadADeadInstance" parameterType="long"
+		resultMap="schedulerInstanceBeanResultMap">
+		<![CDATA[ 
+		SELECT  * FROM SD_INSTANCES WHERE #{now} - REFRESHED_AT > 300000 LIMIT 1
+		]]>
+	</select>
+</mapper>
+

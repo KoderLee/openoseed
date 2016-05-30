@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.openo.crossdomain.servicemgr.mapper.ServiceOperationMapper">
+	
+	<resultMap type="org.openo.crossdomain.servicemgr.model.servicemo.ServiceOperation" id="serviceOperationResultMap">
+        <result property="operation_id" column="OPERATION_ID" />
+        <result property="operation" column="OPERATION" />
+        <result property="tenant_id" column="TENANT_ID" />
+        <result property="service_id" column="SERVICE_ID" />
+        <result property="user_id" column="USER_ID" />
+        <result property="operation_content" column="OPERATION_CONTENT" />
+        <result property="result" column="RESULT" />
+		<result property="reason" column="REASON" />
+		<result property="progress" column="PROGRESS" />
+		<result property="task_uri" column="TASK_URI" />
+		<result property="operate_at" column="OPERATE_AT" />
+		<result property="finished_at" column="FINISHED_AT" />
+    </resultMap>
+	
+	<insert id="insert" parameterType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceOperation">
+		INSERT INTO
+		T_SVCMGR_OPERATION
+		(OPERATION_ID,OPERATION,TENANT_ID,SERVICE_ID,USER_ID,OPERATION_CONTENT,RESULT,REASON,PROGRESS,TASK_URI,OPERATE_AT,FINISHED_AT)
+		VALUES(#{operation_id},#{operation},#{tenant_id},#{service_id},#{user_id},#{operation_content},#{result},#{reason},#{progress},#{task_uri},#{operate_at},#{finished_at})
+	</insert>
+	
+	
+	
+    <update id="update" parameterType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceOperation">
+        UPDATE T_SVCMGR_OPERATION SET
+        OPERATION_CONTENT = #{operation_content},
+        RESULT = #{result},
+        REASON = #{reason},
+        PROGRESS = #{progress},
+        TASK_URI = #{task_uri},
+        FINISHED_AT=#{finished_at} WHERE OPERATION_ID = #{operation_id} 
+    </update>
+    
+	<delete id="delete">
+		DELETE FROM T_SVCMGR_OPERATION WHERE SERVICE_ID = #{service_id}
+	</delete>
+	
+	<delete id="deleteHistory">
+        DELETE FROM T_SVCMGR_OPERATION WHERE FROM_UNIXTIME(OPERATE_AT/1000) &lt; date_sub(now(),interval 2 month)
+    </delete>
+	
+	<select id="getServiceOperationsByServiceID" resultMap="serviceOperationResultMap">
+        SELECT * FROM T_SVCMGR_OPERATION WHERE SERVICE_ID = #{service_id} ORDER BY OPERATE_AT DESC LIMIT 0,100
+    </select>
+    
+	<select id="getServiceOperationByID" resultMap="serviceOperationResultMap">
+		SELECT * FROM T_SVCMGR_OPERATION WHERE SERVICE_ID = #{service_id} AND OPERATION_ID = #{operation_id}
+	</select>
+    
+</mapper>

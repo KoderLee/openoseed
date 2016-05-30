@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2016, Huawei Technologies Co., Ltd.
+   
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.openo.crossdomain.commonsvc.executor.dao.mapper.ServiceExecutorJobMapper">
+    <!--  <typeAlias type="org.openo.crossdomain.commonsvc.executor.model.db.ServiceJobForDB" alias="ServiceJob"/>  -->
+    <resultMap type="org.openo.crossdomain.commonsvc.executor.model.db.ServiceJobForDB" id="jobMap">
+        <constructor>
+            <arg column="JOB_ID" javaType="String"/>
+            <arg column="SERVICE_ID" javaType="String"/>
+            <arg column="JOB_CONTENT" javaType="String"/>
+        </constructor>
+        <id property="jobId" column="JOB_ID"/>
+        <id property="tenantId" column="TENANT_ID"/>
+        <result property="serviceID" column="SERVICE_ID"/>
+        <result property="srvVersion" column="SRV_VERSION"/>
+        <result property="jobContent" column="JOB_CONTENT"/>
+        <result property="status" column="STATUS"
+                typeHandler="org.openo.crossdomain.commonsvc.executor.dao.handler.ExecutionStatusTypeHandler"/>
+        <result property="errorCode" column="RESULT"/>
+        <result property="resultReason" column="RESULT_REASON"/>
+        <result property="createdTime" column="CREATED_TIME"/>
+        <result property="completedTime" column="COMPLETED_TIME"/>
+        <result property="auditBasicInfo" column="AUDIT_BASIC_INFO"/>
+    </resultMap>
+    <insert id="insertExecutorJob" parameterType="org.openo.crossdomain.commonsvc.executor.model.db.ServiceJobForDB">
+        INSERT INTO SRV_SE_JOB
+        (JOB_ID,TENANT_ID,SERVICE_ID,SRV_VERSION,JOB_CONTENT,STATUS,RESULT,RESULT_REASON,CREATED_TIME,COMPLETED_TIME,AUDIT_BASIC_INFO)
+        VALUES(#{jobId},#{tenantId},#{serviceID},#{srvVersion},#{jobContent},
+        #{status, typeHandler=org.openo.crossdomain.commonsvc.executor.dao.handler.ExecutionStatusTypeHandler},
+        #{errorCode},#{resultReason},#{createdTime},#{completedTime}, #{auditBasicInfo})
+    </insert>
+    <delete id="deleteExecutorJob" parameterType="org.openo.crossdomain.commonsvc.executor.model.db.ServiceJobForDB">
+        DELETE FROM SRV_SE_JOB WHERE JOB_ID=#{jobId}
+    </delete>
+    <update id="updateExecutorJob" parameterType="org.openo.crossdomain.commonsvc.executor.model.db.ServiceJobForDB">
+        UPDATE SRV_SE_JOB SET
+        JOB_CONTENT=#{jobContent},
+        STATUS=#{status, typeHandler=org.openo.crossdomain.commonsvc.executor.dao.handler.ExecutionStatusTypeHandler},
+        RESULT=#{errorCode},
+        RESULT_REASON=#{resultReason},
+        CREATED_TIME=#{createdTime},
+        COMPLETED_TIME=#{completedTime}
+        WHERE JOB_ID= #{jobId}
+    </update>
+    <select id="getAllJobs" resultMap="jobMap">
+        SELECT * FROM SRV_SE_JOB
+    </select>
+
+    <select id="getJobsByJobId" resultMap="jobMap">
+        SELECT * FROM SRV_SE_JOB
+        WHERE JOB_ID in
+        <foreach item="item" collection="jobIdList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getJob" parameterType="java.lang.String" resultMap="jobMap">
+        SELECT * FROM SRV_SE_JOB
+        WHERE JOB_ID= #{jobId}
+    </select>
+
+    <select id="getJobByServiceID" resultMap="jobMap">
+        SELECT * FROM SRV_SE_JOB
+        <if test="serviceID != null">
+            WHERE SERVICE_ID= #{serviceID}
+        </if>
+        <if test="startIndex > -1 and pageCapacity > -1">
+            LIMIT #{startIndex},#{pageCapacity}
+        </if>
+    </select>
+    <select id="getJobCount">
+        SELECT count(JOB_ID) FROM SRV_SE_JOB
+        WHERE STATUS != 'complete'
+    </select>
+
+    <select id="getJobId" resultType="String">
+        SELECT JOB_ID FROM SRV_SE_JOB
+        <if test="statusList != null or createdTime != 0">
+            WHERE
+        </if>
+        <if test="statusList != null">
+            STATUS IN
+            <foreach item="item" collection="statusList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="createdTime != 0">
+            <if test="statusList != null">
+                AND
+            </if>
+            <![CDATA[ CREATED_TIME < #{createdTime} ]]>
+        </if>
+    </select>
+
+</mapper>

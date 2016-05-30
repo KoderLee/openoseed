@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!--
+    Copyright (c) 2016, Huawei Technologies Co., Ltd.
+   
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.icto.commsvc.jobscheduler.dao.mapper.IJobContextMapper">
+
+	<resultMap type="com.huawei.icto.commsvc.jobscheduler.model.JobContext"
+		id="jobContextResultMap">
+		<result property="jobId" column="JOB_ID" />
+		<result property="contextSegment" column="CONTEXT_SEGMENT" />
+		<result property="position" column="POSITION" />
+	</resultMap>
+
+	<insert id="insert"
+		parameterType="com.huawei.icto.commsvc.jobscheduler.model.JobContext">
+		INSERT INTO SD_JOB_CONTEXTS
+		VALUES(#{jobId},#{contextSegment},#{position})
+	</insert>
+
+	<delete id="delete">
+		DELETE FROM SD_JOB_CONTEXTS WHERE JOB_ID = #{jobID}
+	</delete>
+
+	<select id="loadJobContexts"
+		resultMap="jobContextResultMap">
+		SELECT * FROM
+		SD_JOB_CONTEXTS
+		WHERE JOB_ID =
+		#{jobID} ORDER BY POSITION ASC
+	</select>
+</mapper>
+

@@ -1,0 +1,16 @@
+{
+	"deleteCompletedJobsAfter30Days" : {
+		"action" : "/rest/executor/v1/timingtask/jobs/deletion",
+		"description" : "Timing task for deleting completed jobs after 30 days.",
+		"type" : "LOOP",
+		"periodUnit" : "DAY",
+		"period" : 1
+	},
+	"checkRedisFull" : {
+		"action" : "/rest/executor/v1/timingtask/jobs/check_redis_full",
+		"description" : "Timing task for checking redis too full after 5 minutes.",
+		"type" : "LOOP",
+		"periodUnit" : "MIN",
+		"period" : 5
+	}
+}

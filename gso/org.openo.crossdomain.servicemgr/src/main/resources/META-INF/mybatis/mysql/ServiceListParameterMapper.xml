@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.openo.crossdomain.servicemgr.mapper.ServiceListParameterMapper">
+	<resultMap
+		type="org.openo.crossdomain.servicemgr.model.servicemo.ServiceListParameter"
+		id="SvcListParamResultMap">
+		<result property="paramgroup_name" column="PARAMGROUP_NAME" />
+		<result property="service_id" column="SERVICE_ID" />
+		<result property="key_name" column="KEY_NAME" />
+		<result property="parameter_value" column="PARAMETER_VALUE" />
+	</resultMap>
+	<insert id="insert"
+		parameterType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceListParameter">
+		INSERT INTO
+		T_SVCMGR_SERVICELISTPARAM
+		(PARAMGROUP_NAME,SERVICE_ID,KEY_NAME,PARAMETER_VALUE)
+		VALUES(#{paramgroup_name},#{service_id},#{key_name},#{parameter_value})
+	</insert>
+
+	<delete id="deleteByServiceID">
+		DELETE FROM T_SVCMGR_SERVICELISTPARAM WHERE
+		SERVICE_ID = #{service_id}
+	</delete>
+
+	<delete id="deleteByKeyName">
+		DELETE FROM T_SVCMGR_SERVICELISTPARAM WHERE
+		SERVICE_ID = #{service_id} AND PARAMGROUP_NAME
+		= #{paramgroup_name} AND KEY_NAME = #{key_name}
+	</delete>
+
+	<update id="update"
+		parameterType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceListParameter">
+		UPDATE
+		T_SVCMGR_SERVICELISTPARAM SET
+		PARAMETER_VALUE=#{parameter_value}
+		WHERE SERVICE_ID = #{service_id} AND
+		KEY_NAME = #{key_name}
+	</update>
+
+	<select id="getServiceListParameterByKeyName" parameterType="string"
+		resultType="org.openo.crossdomain.servicemgr.model.servicemo.ServiceListParameter">
+		SELECT * FROM T_SVCMGR_SERVICELISTPARAM WHERE
+		SERVICE_ID = #{service_id}
+		AND PARAMGROUP_NAME =
+		#{paramgroup_name} AND KEY_NAME =
+		#{key_name}
+	</select>
+
+	<select id="getServiceListParameterList" resultMap="SvcListParamResultMap">
+		SELECT * FROM
+		T_SVCMGR_SERVICELISTPARAM
+		 WHERE SERVICE_ID IN 
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")"> 
+			#{item} 
+		</foreach>
+	</select>
+
+</mapper>

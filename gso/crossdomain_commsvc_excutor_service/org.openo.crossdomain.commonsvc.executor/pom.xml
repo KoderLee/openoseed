@@ -1,0 +1,123 @@
+<!--
+    Copyright (c) 2016, Huawei Technologies Co., Ltd.
+   
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>org.openo.crossdomain.commsvc.pkgbase</artifactId>
+        <groupId>org.openo.crossdomain.commsvc</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.openo.crossdomain.commonsvc</groupId>
+    <artifactId>org.openo.crossdomain.commonsvc.executor</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>org.openo.crossdomain.commonsvc.executor</name>
+    <description>org.openo.crossdomain.commonsvc.executor</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openo.commonservice</groupId>
+            <artifactId>org.openo.commonservice.mybatis</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openo.commonservice</groupId>
+            <artifactId>org.openo.commonservice.roa.cbb</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openo.commonservice</groupId>
+            <artifactId>org.openo.commonservice.data</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openo.commonservice</groupId>
+            <artifactId>org.openo.commonservice.rpc.cbb</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openo.commonservice.biz</groupId>
+            <artifactId>org.openo.commonservice.biz.trail</artifactId>
+            <version>5.1.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openo.crossdomain.commsvc</groupId>
+            <artifactId>org.openo.crossdomain.commsvc.formation</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openo.crossdomain.commsvc</groupId>
+            <artifactId>org.openo.crossdomain.commsvc.authorization.filter</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openo.crossdomain.commsvc</groupId>
+            <artifactId>org.openo.crossdomain.commsvc.jobscheduler</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.1.3.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit</artifactId>
+            <version>1.18</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jmockit</groupId>
+            <artifactId>jmockit-coverage</artifactId>
+            <version>1.18</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <release.dir>${basedir}/../release/pkgzip/module/org.openo.crossdomain.commonsvc.executor/repository/as/</release.dir>
+        <resources.dir>${basedir}/src/main/resources</resources.dir>
+        <osgi.activator>org.openo.crossdomain.commonsvc.executor.activator.Activator</osgi.activator>
+        <osgi.import>
+            !org.mybatis.spring,
+            !org.mybatis.spring.mapper,
+            !org.apache.ibatis.annotations,
+            !org.apache.ibatis.type,
+            !com.as.bsp.extension.*,
+            !org.openo.commonservice.biz.trail.*,
+            !javax.validation.*,
+            !org.apache.commons.collections.*,
+            !org.apache.ibatis.exceptions,
+            !redis.clients.jedis.*,
+            !org.openo.crossdomain.commsvc.*
+        </osgi.import>
+    </properties>
+</project>

@@ -1,0 +1,24 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>org.openo.nfvo.nsservice</artifactId>
+		<groupId>org.openo.nfvo</groupId>
+		<version>2.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>ns-service-root</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>NsServiceRoot</name>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<!--<scm> <developerConnection>scm:git:http://szxgit01-rd.huawei.com:8080/SPO/SPO_CloudSOP_GIT/CronService</developerConnection> 
+		<tag>HEAD</tag> </scm> -->
+
+	<modules>
+		<module>service</module>
+		<module>deployment</module>
+	</modules>
+</project>

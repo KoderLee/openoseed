@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!--
+    Copyright (c) 2016, Huawei Technologies Co., Ltd.
+   
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+   
+        http://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+ -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.icto.commsvc.jobscheduler.dao.mapper.IJobMapper">
+
+	<resultMap type="com.huawei.icto.commsvc.jobscheduler.model.JobBean"
+		id="jobBeanResultMap">
+		<result property="id" column="ID" />
+		<result property="version" column="VERSION" />
+		<result property="type" column="TYPE" />
+		<result property="contextTag" column="CONTEXT_TAG" />
+		<result property="createdAt" column="CREATED_AT" />
+		<result property="lastScheduledAt" column="LAST_SCHEDULED_AT" />
+		<result property="schedulerID" column="SCHEDULER_ID" />
+		<result property="attribute" column="ATTRIBUTE" />
+	</resultMap>
+
+	<insert id="insert"
+		parameterType="com.huawei.icto.commsvc.jobscheduler.model.JobBean">
+		INSERT INTO SD_ACTIVE_JOBS
+		VALUES(#{id},#{version},#{type},#{contextTag},#{createdAt},#{lastScheduledAt},
+		#{schedulerID},#{attribute})
+	</insert>
+
+	<update id="update"
+		parameterType="com.huawei.icto.commsvc.jobscheduler.model.JobBean">
+		UPDATE SD_ACTIVE_JOBS SET
+		CONTEXT_TAG = #{contextTag},
+		TYPE=#{type} WHERE ID = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM SD_ACTIVE_JOBS WHERE ID = #{jobID}
+	</delete>
+
+	<update id="updateLastScheduledAt"
+		parameterType="com.huawei.icto.commsvc.jobscheduler.model.JobBean">
+		UPDATE
+		SD_ACTIVE_JOBS SET
+		LAST_SCHEDULED_AT =
+		#{lastScheduledAt}# WHERE ID =
+		#{id}#
+	</update>
+
+	<update id="adoptJobs">
+		UPDATE SD_ACTIVE_JOBS SET
+		SCHEDULER_ID =
+		#{newScheduler}, LAST_SCHEDULED_AT = #{thisScheduledAt}
+		WHERE
+		SCHEDULER_ID
+		= #{oldScheduler}
+	</update>
+	<select id="loadAdoptJobs"
+		resultMap="jobBeanResultMap">
+		SELECT * FROM
+		SD_ACTIVE_JOBS
+		WHERE LAST_SCHEDULED_AT =
+		#{thisScheduledAt} AND
+		SCHEDULER_ID =
+		#{newScheduler}
+		<if test="limit > 0" > LIMIT #{limit}</if>
+	</select>
+</mapper>
+

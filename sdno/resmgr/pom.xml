@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.openo.sdno</groupId>
+        <artifactId>org.openo.sdno.project.pkg-common</artifactId>
+        <version>3.0-SNAPSHOT</version>
+    </parent>
+    
+	<groupId>org.openo.sdno</groupId>
+	<artifactId>sdno.resmgr.brs</artifactId>
+	<packaging>pom</packaging>
+	<name>resmgr</name>
+	
+	<modules>    
+		<module>org.openo.sdno.resmgr.brs</module>
+	</modules>
+</project>

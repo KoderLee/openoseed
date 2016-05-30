@@ -1,0 +1,29 @@
+[{
+    "uri-pattern": "/rest/executor/v1/jobs",
+    "method": "POST",
+     "action": "executor:jobs:create"
+}, {
+    "uri-pattern": "/rest/executor/v1/jobs/{job_id}",
+    "method": "PUT",
+    "action": "executor:jobs:modify"
+}, {
+    "uri-pattern": "/rest/executor/v1/jobs/{job_id}",
+    "method": "GET",
+    "action": "executor:jobs:get"
+}, {
+    "uri-pattern": "/rest/executor/v1/jobs",
+    "method": "GET",
+    "action": "executor:jobs:get"
+}, {
+    "uri-pattern": "/rest/executor/v1/rules/register",
+    "method": "PUT",
+    "action": "executor:rules:register:modify"
+}, {
+    "uri-pattern": "/rest/executor/v1/rules/unregister",
+    "method": "PUT",
+    "action": "executor:rules:unregister:modify"
+}, {
+    "uri-pattern": "/rest/executor/v1/rules",
+    "method": "GET",
+    "action": "executor:rules:get"
+}]

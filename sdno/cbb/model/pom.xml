@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.openo.sdno</groupId>
+        <artifactId>sdno.cbb.sdnwan</artifactId>
+        <version>2.0-SNAPSHOT</version>
+    </parent>
+    <groupId>org.openo.sdno</groupId>
+    <artifactId>org.openo.sdno.model</artifactId>
+    <version>2.0-SNAPSHOT</version>
+    <name>org.openo.sdno.model</name>
+    <packaging>pom</packaging>
+    <properties>
+        <ver.oms>2.0.0.RELEASE</ver.oms>
+        <ver.sample>2.0-SNAPSHOT</ver.sample>
+    </properties>
+    <modules>
+        <module>org.openo.sdno.model.vpn.wan</module>
+    </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-XX:-UseSplitVerifier</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

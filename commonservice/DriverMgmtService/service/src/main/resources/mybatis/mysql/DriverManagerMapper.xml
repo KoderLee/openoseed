@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.openo.ict.drivermgmt.persistence.dao.IDriverOperationMapper">
+
+    <insert id="insertInstanceInfo"
+            parameterType="org.openo.ict.drivermgmt.model.InstanceInfoModel">
+        INSERT 
+        INTO drivermgrmdb.tbl_instance (id, instName, model, resourceType, extendInfo)
+        VALUES (#{id},#{instName},#{model},#{resourceType},#{extendInfo})
+    </insert>
+
+    <delete id="deleteInstanceInfo">
+        DELETE 
+        FROM drivermgrmdb.tbl_instance WHERE instName=#{0}
+    </delete>
+
+    <select id="queryInstanceInfo"
+            resultType="org.openo.ict.drivermgmt.model.InstanceInfoModel">
+        SELECT instName,model 
+        FROM drivermgrmdb.tbl_instance WHERE instName=#{0}
+    </select>
+
+    <select id="queryAllInstanceInfos"
+            resultType="org.openo.ict.drivermgmt.model.InstanceInfoModel">
+        SELECT * 
+        FROM drivermgrmdb.tbl_instance
+    </select>
+
+    <select id="queryInstanceInfosOfResourceType"
+            resultType="org.openo.ict.drivermgmt.model.InstanceInfoModel">
+        SELECT *
+        FROM drivermgrmdb.tbl_instance
+        WHERE resourceType=#{0}
+    </select>
+
+
+    <insert id="insertResourceRule"
+            parameterType="org.openo.ict.drivermgmt.model.ResourceRuleModel">
+        INSERT 
+        INTO drivermgrmdb.tbl_resource (id, resourceType, routeRule, extendInfo) 
+        VALUES (#{id},#{resourceType},#{routeRule},#{extendInfo})
+    </insert>
+
+    <delete id="deleteResourceRule">
+        DELETE 
+        FROM drivermgrmdb.tbl_resource WHERE resourceType=#{0}
+    </delete>
+
+    <select id="queryResourceRule"
+            resultType="org.openo.ict.drivermgmt.model.ResourceRuleModel">
+        SELECT * 
+        FROM drivermgrmdb.tbl_resource WHERE resourceType=#{0}
+    </select>
+
+
+    <insert id="insertRouteidInstance"
+            parameterType="org.openo.ict.drivermgmt.model.RouteIdInstanceModel">
+        INSERT 
+        INTO drivermgrmdb.tbl_route (id, routeId, instName, extendInfo) 
+        VALUES (#{id},#{routeId},#{instName},#{extendInfo})
+    </insert>
+
+    <update id="updateRouteidInstance"
+            parameterType="org.openo.ict.drivermgmt.model.RouteIdInstanceModel">
+        UPDATE
+        drivermgrmdb.tbl_route
+        <set>
+            id=#{id},
+            instName=#{instName},
+            extendInfo=#{extendInfo},
+        </set>
+        WHERE routeId=#{routeId}
+    </update>
+
+    <delete id="deleteRouteidInstance"> 
+        DELETE 
+        FROM drivermgrmdb.tbl_route where routeId=#{0}
+    </delete>
+
+    <select id="queryAllRouteidInstances"
+            resultType="org.openo.ict.drivermgmt.model.RouteIdInstanceModel">
+        SELECT * 
+        FROM drivermgrmdb.tbl_route
+    </select>
+
+    <select id="queryRouteidInstance"
+            resultType="org.openo.ict.drivermgmt.model.RouteIdInstanceModel">
+        SELECT * FROM drivermgrmdb.tbl_route where routeId=#{0}
+    </select>
+
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+    xmlns:ctx="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/osgi
+    http://www.springframework.org/schema/osgi/spring-osgi.xsd
+	http://www.springframework.org/schema/context	
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/osgi-compendium 
+	http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
+	<bean id="vimDao"
+		class="org.openo.nfvo.vimadapter.service.database.dao.VimDaoImpl">
+		<property name="mapperManager" ref="mapperManager"></property>
+	</bean>
+
+	<bean id="ovdcNetDao"
+		class="org.openo.nfvo.vimadapter.service.database.dao.OvdcNetDaoImpl">
+		<property name="mapperManager" ref="mapperManager"></property>
+	</bean>
+
+	<bean id="ovdcNetwork"
+		class="org.openo.nfvo.vimadapter.vmware.networkmgr.OVDCNetwork">
+		<property name="ovdcNetDao" ref="ovdcNetDao"></property>
+	</bean>
+
+	<bean id="adapterVimManager"
+		class="org.openo.nfvo.vimadapter.service.adapter.AdapterVimManager">
+		<property name="vimDao" ref="vimDao"></property>
+	</bean>
+
+	<bean id="vimROA" class="org.openo.nfvo.vimadapter.rest.VimROA">
+		<property name="adapter" ref="adapterVimManager"></property>
+	</bean>
+
+	<bean id="adapterResourceManager"
+		class="org.openo.nfvo.vimadapter.service.adapter.AdapterResourceManager">
+		<property name="vimDao" ref="vimDao"></property>
+	</bean>
+
+	<bean id="resourceRoa" class="org.openo.nfvo.vimadapter.rest.ResourceRoa">
+		<property name="adapter" ref="adapterResourceManager"></property>
+	</bean>
+
+	<bean class="org.openo.nfvo.vimadapter.service.task.HandShakeTask"
+		init-method="init" destroy-method="fini">
+		<property name="adapter" ref="adapterVimManager"></property>
+	</bean>
+
+	<bean id="adapterNetworkManager"
+		class="org.openo.nfvo.vimadapter.service.adapter.AdapterNetworkManager">
+		<property name="vimDao" ref="vimDao"></property>
+	</bean>
+
+	<bean id="networkRoa" class="org.openo.nfvo.vimadapter.rest.NetworkRoa">
+		<property name="adapter" ref="adapterNetworkManager"></property>
+	</bean>
+
+	<bean id="springContextHolder" class="org.openo.nfvo.vimadapter.util.SpringContextHolder" />
+
+</beans>

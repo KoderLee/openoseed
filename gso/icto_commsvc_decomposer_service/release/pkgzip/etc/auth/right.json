@@ -1,0 +1,33 @@
+[{
+	"uri-pattern": "/rest/decomposer/v1/rules/register",
+	"method": "POST",
+	"action": "decomposer:rules:register:modify"
+}, {
+	"uri-pattern": "/rest/decomposer/v1/rules",
+	"method": "GET",
+	"action": "decomposer:rules:get"
+}, {
+	"uri-pattern": "/rest/decomposer/v1/rules/unregister",
+	"method": "POST",
+	"action": "decomposer:rules:unregister:modify"
+}, {
+	"uri-pattern": "/rest/decomposer/v1/tasks",
+	"method": "POST",
+	"action": "decomposer:tasks:create"
+}, {
+	"uri-pattern": "/rest/decomposer/v1/tasks",
+	"method": "GET",
+	"action": "decomposer:tasks:get"
+}, {
+	"uri-pattern": "/rest/decomposer/v1/services/{service_id}/resources",
+	"method": "GET",
+	"action": "decomposer:resources:get"
+}, {
+	"uri-pattern": "/rest/decomposer/v1/tasks/{task_id}",
+	"method": "GET",
+	"action": "decomposer:task:get"
+}, {
+	"uri-pattern": "/rest/decomposer/v1/tasks/{task_id}/logs",
+	"method": "GET",
+	"action": "decomposer:tasklogs:get"
+}]
